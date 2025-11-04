@@ -33,7 +33,23 @@ def metadata(request):
 def default_settings(request):
     obj = DefaultSettings.objects.order_by('-id').first()
     if not obj:
-        return JsonResponse({"error": "No default settings found"}, status=404)
+        # Only on the first run, seed from ui/data/default.json
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        default_path = os.path.join(base_dir, 'data', 'default.json')
+        with open(default_path, 'r', encoding='utf-8') as f:
+            payload = json.load(f)
+
+        # Create and save once so future calls use DB
+        obj = DefaultSettings.objects.create(
+            resource_limits=payload.get("resource_limits", {}),
+            weights=payload.get("weights", {}),
+            recipes_off=payload.get("recipes_off", []),
+            inputs=payload.get("inputs", {}),
+            outputs=payload.get("outputs", {}),
+            max_item=payload.get("max_item", False),
+            checkbox_Nuclear_Waste=payload.get("checkbox_Nuclear Waste", False),
+        )
+
     payload = {
         "resource_limits": obj.resource_limits,
         "weights": obj.weights,
