@@ -29,12 +29,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", ENV.get("SECRET_KEY", "unsafe-default-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-
-# Trust Azure host for CSRF when deploying
-CSRF_TRUSTED_ORIGINS = [
-    *(f"https://{h}" for h in ALLOWED_HOSTS if "." in h),
-]
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
+CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in ALLOWED_HOSTS if "." in h]
 
 # Application definition
 
