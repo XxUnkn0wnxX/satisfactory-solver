@@ -1,6 +1,6 @@
 from .model import create_model
 import os, shutil
-from pyomo.opt import SolverFactory
+from pyomo.environ import SolverFactory
 
 def optimize_production(data, settings):
     # Remove max_item from outputs if exists
