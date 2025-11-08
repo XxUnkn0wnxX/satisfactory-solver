@@ -90,21 +90,11 @@ Key packages involved:
    Certificates live under `certs/` and are ignored by Git via `.gitignore`.
 
 3. **Run the app over HTTPS**
-   - **Django (WSGI) with `runserver_plus`**
-     - macOS / Linux
-       ```bash
-       python manage.py runserver_plus \
-         --cert-file certs/localhost.pem \
-         --key-file  certs/localhost-key.pem \
-         127.0.0.1:8100
-       ```
-     - Windows (PowerShell)
-       ```powershell
-       python manage.py runserver_plus `
-         --cert-file certs/localhost.pem `
-         --key-file  certs/localhost-key.pem `
-         127.0.0.1:8100
-       ```
+   - **Django (WSGI) with `runserver_plus`**  
+     Command is identical in Bash and PowerShell—run it on one line:
+     ```bash
+     python manage.py runserver_plus --cert-file certs/localhost.pem --key-file certs/localhost-key.pem 127.0.0.1:8100
+     ```
    - **ASGI with `uvicorn`**
      - macOS / Linux
        ```bash
@@ -184,21 +174,10 @@ Use this when `mkcert` is unavailable. Browsers will warn until you manually tru
      > Install OpenSSL via Chocolatey (`choco install openssl`) if it is not already available.
 
 2. **Run with the self-signed certs**
-   - **`runserver_plus`**
-     - macOS / Linux
-       ```bash
-       python manage.py runserver_plus \
-         --cert-file certs/localhost.pem \
-         --key-file  certs/localhost-key.pem \
-         127.0.0.1:8100
-       ```
-     - Windows (PowerShell)
-       ```powershell
-       python manage.py runserver_plus `
-         --cert-file certs/localhost.pem `
-         --key-file  certs/localhost-key.pem `
-         127.0.0.1:8100
-       ```
+   - **`runserver_plus`** (same command in Bash and PowerShell)
+     ```bash
+     python manage.py runserver_plus --cert-file certs/localhost.pem --key-file certs/localhost-key.pem 127.0.0.1:8100
+     ```
    - **`uvicorn`**
      - macOS / Linux
        ```bash
@@ -226,59 +205,27 @@ Use this when `mkcert` is unavailable. Browsers will warn until you manually tru
 ```bash
 python manage.py runsslserver 127.0.0.1:8100
 ```
+PowerShell uses the same syntax; run the command on a single line.
 
 Add `--nothreading` if you hit threading-related reload issues:
 
 ```bash
 python manage.py runsslserver 127.0.0.1:8100 --nothreading
 ```
-
-Windows PowerShell:
-
-```powershell
-python manage.py runsslserver 127.0.0.1:8100
-```
-
-Optional threading guard:
-
-```powershell
-python manage.py runsslserver 127.0.0.1:8100 --nothreading
-```
+Same command applies in PowerShell; run it on a single line as well.
 Or reuse the certificates from Options A/B:
 
 ```bash
-python manage.py runsslserver \
-  --certificate certs/localhost.pem \
-  --key certs/localhost-key.pem \
-  127.0.0.1:8100
+python manage.py runsslserver --certificate certs/localhost.pem --key certs/localhost-key.pem 127.0.0.1:8100
 ```
+PowerShell users can run the same command without changes.
 
 Optional:
 
 ```bash
-python manage.py runsslserver \
-  --certificate certs/localhost.pem \
-  --key certs/localhost-key.pem \
-  127.0.0.1:8100 --nothreading
+python manage.py runsslserver --certificate certs/localhost.pem --key certs/localhost-key.pem 127.0.0.1:8100 --nothreading
 ```
-
-Windows PowerShell:
-
-```powershell
-python manage.py runsslserver `
-  --certificate certs/localhost.pem `
-  --key certs/localhost-key.pem `
-  127.0.0.1:8100
-```
-
-Optional:
-
-```powershell
-python manage.py runsslserver `
-  --certificate certs/localhost.pem `
-  --key certs/localhost-key.pem `
-  127.0.0.1:8100 --nothreading
-```
+Again, the PowerShell command is identical when entered on one line.
 
 ## Troubleshooting
 
