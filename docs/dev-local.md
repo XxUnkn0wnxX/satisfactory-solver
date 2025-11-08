@@ -43,7 +43,7 @@ Key packages involved:
 `mkcert` creates locally trusted certificates so browsers do not warn about HTTPS.
 
 1. **Install and trust the local CA**
-   - **macOS (Homebrew)**
+   - **macOS (Homebrew)** (see [brew.sh](https://brew.sh))
      ```bash
      brew install mkcert
      brew install nss        # optional: Firefox trust store
