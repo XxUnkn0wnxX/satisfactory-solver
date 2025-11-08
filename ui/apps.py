@@ -1,4 +1,8 @@
+import logging
+
 from django.apps import AppConfig
+
+logger = logging.getLogger(__name__)
 
 class UiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
@@ -30,6 +34,11 @@ class UiConfig(AppConfig):
                         outputs=raw.get("outputs", {}),
                         max_item=raw.get("max_item") or None,
                         checkbox_Nuclear_Waste=raw.get("checkbox_Nuclear Waste", False),
+                    )
+                else:
+                    logger.warning(
+                        "ui: default settings seed skipped; expected file missing: %s",
+                        default_path,
                     )
             except (OperationalError, ProgrammingError):
                 # Database not ready yet (migrations incomplete)
