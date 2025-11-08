@@ -85,7 +85,7 @@ If a resource limit is smaller than `0.0001`, it is automatically floored to `0.
 
 ## License & Credits
 
-Created by `/u/wrigh516` for Satisfactory enthusiasts.
+Created by [/u/wrigh516](https://www.reddit.com/user/wrigh516/) for Satisfactory enthusiasts.
 
 Not affiliated with Coffee Stain Studios or the official game.
 
