@@ -38,6 +38,22 @@ Key packages involved:
 - `uvicorn` – optional ASGI server with `--ssl-*` flags.
 - `django-sslserver` – legacy fallback that can auto-generate certs.
 
+## Prepare the Database
+
+Before launching any HTTPS-enabled dev server, make sure the Django database is ready:
+
+```bash
+python manage.py migrate
+```
+
+Optionally seed an admin account for UI access:
+
+```bash
+python manage.py createsuperuser
+```
+
+The same one-line commands work in PowerShell. Run them once per environment (or whenever migrations change) before starting the server.
+
 ## Option A – Trusted Certificates via `mkcert` (Recommended)
 
 `mkcert` creates locally trusted certificates so browsers do not warn about HTTPS.
