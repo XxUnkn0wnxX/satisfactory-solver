@@ -227,12 +227,23 @@ Use this when `mkcert` is unavailable. Browsers will warn until you manually tru
 python manage.py runsslserver 127.0.0.1:8100
 ```
 
+Add `--nothreading` if you hit threading-related reload issues:
+
+```bash
+python manage.py runsslserver 127.0.0.1:8100 --nothreading
+```
+
 Windows PowerShell:
 
 ```powershell
 python manage.py runsslserver 127.0.0.1:8100
 ```
 
+Optional threading guard:
+
+```powershell
+python manage.py runsslserver 127.0.0.1:8100 --nothreading
+```
 Or reuse the certificates from Options A/B:
 
 ```bash
@@ -242,6 +253,15 @@ python manage.py runsslserver \
   127.0.0.1:8100
 ```
 
+Optional:
+
+```bash
+python manage.py runsslserver \
+  --certificate certs/localhost.pem \
+  --key certs/localhost-key.pem \
+  127.0.0.1:8100 --nothreading
+```
+
 Windows PowerShell:
 
 ```powershell
@@ -249,6 +269,15 @@ python manage.py runsslserver `
   --certificate certs/localhost.pem `
   --key certs/localhost-key.pem `
   127.0.0.1:8100
+```
+
+Optional:
+
+```powershell
+python manage.py runsslserver `
+  --certificate certs/localhost.pem `
+  --key certs/localhost-key.pem `
+  127.0.0.1:8100 --nothreading
 ```
 
 ## Troubleshooting
