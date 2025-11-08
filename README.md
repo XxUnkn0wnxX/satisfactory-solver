@@ -50,12 +50,13 @@ The web interface is built in vanilla HTML, CSS, and JavaScript (see `index.html
    ```
 4. Run the development server:
    ```bash
-   python manage.py runserver
+   python manage.py runsslserver 127.0.0.1:8100
    ```
 5. Open your browser at:
    ```
-   http://127.0.0.1:8000/
+   https://127.0.0.1:8100/
    ```
+   For advanced HTTPS setup options (mkcert, self-signed, ASGI) see [docs/dev-local.md](docs/dev-local.md).
 
 ## Optimization Details
 
