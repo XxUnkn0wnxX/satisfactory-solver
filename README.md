@@ -24,15 +24,16 @@ The web interface is built in vanilla HTML, CSS, and JavaScript (see `index.html
 
 | Path                  | Purpose                                         |
 | --------------------- | ----------------------------------------------- |
-| `ui/index.html`       | Main single-page interface                      |
-| `ui/views.py`         | Django views and API endpoints                  |
-| `ui/models.py`        | `DefaultSettings` and `SavedSettings` models    |
-| `ui/admin.py`         | Django admin configuration                      |
-| `ui/urls.py`          | URL routes                                      |
-| `optimizer/main.py`   | Entry point for optimization calls              |
-| `optimizer/model.py`  | Pyomo model creation and constraints            |
-| `requirements.txt`    | Python dependencies                             |
-| `ui/data/data.json`   | Core Satisfactory item and recipe data          |
+| [`ui/index.html`](ui/index.html) | Main single-page interface                |
+| [`ui/views.py`](ui/views.py) | Django views and API endpoints            |
+| [`ui/models.py`](ui/models.py) | `DefaultSettings` and `SavedSettings` models |
+| [`ui/admin.py`](ui/admin.py) | Django admin configuration                  |
+| [`ui/urls.py`](ui/urls.py) | URL routes                                      |
+| [`ui/optimizer/main.py`](ui/optimizer/main.py) | Entry point for optimization calls |
+| [`ui/optimizer/model.py`](ui/optimizer/model.py) | Pyomo model creation and constraints |
+| [`requirements.txt`](requirements.txt) | Python dependencies                   |
+| [`DataGen.py`](DataGen.py) | Generates solver data from the game's Docs JSON |
+| [`ui/data/data.json`](ui/data/data.json) | Core Satisfactory item and recipe data |
 
 ## Running Locally
 
@@ -57,6 +58,40 @@ The web interface is built in vanilla HTML, CSS, and JavaScript (see `index.html
    https://127.0.0.1:8100/
    ```
    For advanced HTTPS setup options (mkcert, self-signed, ASGI) see [docs/dev-local.md](docs/dev-local.md).
+
+## Data Generation
+
+[`DataGen.py`](DataGen.py) generates `ui/data/data.json` from a localized Satisfactory
+Community Resources Docs file, such as `CommunityResources/Docs/en-US.json`.
+The source file is included with the Windows game installation and may be
+UTF-16 or UTF-8 encoded.
+
+Generate the default data file:
+
+```bash
+python3 DataGen.py path/to/en-US.json
+```
+
+Write to a custom JSON path:
+
+```bash
+python3 DataGen.py path/to/en-US.json --out path/to/custom.json
+```
+
+View the available arguments:
+
+```bash
+python3 DataGen.py --help
+```
+
+The generator extracts the item, resource, recipe, machine, fuel, power, and
+AWESOME Sink data required by the optimizer. It also generates the solver's
+synthetic power items and fuel-generator recipes.
+
+Power Shard recipes are intentionally excluded because Power Slugs are
+collectible inputs rather than constrained map resources. Including those
+recipes would let the current optimizer treat Power Slugs as unlimited free
+inputs.
 
 ## Optimization Details
 
