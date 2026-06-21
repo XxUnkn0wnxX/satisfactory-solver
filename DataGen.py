@@ -358,6 +358,13 @@ def write_output(data: dict, path: Path) -> None:
     )
 
 
+def display_path(path: Path) -> Path:
+    try:
+        return path.resolve().relative_to(SCRIPT_DIR)
+    except ValueError:
+        return path
+
+
 def main() -> int:
     args = parse_args()
     try:
@@ -373,7 +380,7 @@ def main() -> int:
         return 1
 
     print(
-        f"Generated {output} "
+        f"Generated {display_path(output)} "
         f"({len(data['items'])} items, {len(data['resources'])} resources, "
         f"{len(data['recipes'])} recipes, {len(data['machines'])} machines)"
     )
